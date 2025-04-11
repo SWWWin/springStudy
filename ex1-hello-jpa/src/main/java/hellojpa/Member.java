@@ -1,24 +1,23 @@
 package hellojpa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-@Entity//ㅇㅣ걸 관리해야 한다는 인식이 생긴다
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+
+@Entity
+@TableGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        table = "MY_SEQUENCES",
+        pkColumnValue = "MEMBER_SEQ", allocationSize = 1)
 public class Member {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
-    //@Column(name = "username")
-    private String name;
 
-    public Member() {
-
-    }
-    public Member(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Column(name = "name", nullable = false)
+    private String username;
 
     public Long getId() {
         return id;
@@ -28,11 +27,16 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public Member() {
+
+    }
+
 }

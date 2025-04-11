@@ -1,6 +1,9 @@
-package hellojpa;
+package jpabook.jpashop;
+
+
 
 import jakarta.persistence.*;
+import jpabook.jpashop.domain.Order;
 
 import java.util.List;
 
@@ -16,11 +19,9 @@ public class JpaMain {
 
         try{
 
-            Member member = new Member();
+            Order order = em.find(Order.class, 1L);
+            Long memberId = order.getMember().getId();
 
-            member.setUsername("C");
-
-            em.persist(member);
             tx.commit();
         } catch(Exception e) {
             tx.rollback();
