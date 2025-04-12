@@ -4,6 +4,7 @@ package jpabook.jpashop;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class JpaMain {
 
         try{
 
-            Order order = em.find(Order.class, 1L);
-            Long memberId = order.getMember().getId();
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
             tx.commit();
         } catch(Exception e) {
